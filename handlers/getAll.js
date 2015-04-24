@@ -1,6 +1,16 @@
 module.exports = function(model, options){
 
 	return function(req, res){
-		res.status(404).end(); // TODO: create actual hanler
+
+		// getting all items
+		model.find()
+			.exec(function(err, items){
+				// throwing database error
+				if(err)
+					throw err;
+
+				// sending response
+				res.status(200).json(items).end();
+			});
 	};
 };
